@@ -31,15 +31,17 @@ int main() {
 			character = strtok(NULL, " ");
 		}
 		//Print whats in array
-		for(i = 0; i < counter; i++) {
-			printf("array position %d contains: %s\n",i, array[i]);
-		}
+//		for(i = 0; i < counter; i++) {
+//			printf("array position %d contains: %s\n",i, array[i]);
+//		}
 		printf("searching for command:%s\n", array[0]);
-		if(strcmp("exit", array[0]) == 0) {
-			printf("Exiting aman-shell");
+		if((strcmp("exit\n", array[0]) == 0) || strcmp("exit()\n", array[0]) == 0){
+			printf("Exiting aman-shell\n");
 			return EXIT_SUCCESS;
-		}else if(strcmp("ls", array[0]) == 0) { 
-
+		}else if(strcmp("echo", array[0]) == 0) {
+			for(i = 1; i < counter; i++) {
+				printf("%s ",array[i]);
+			}			
 		}else {
 			printf("Command not recognized \n");
 		}
