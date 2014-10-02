@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <sys/types.h>
-#include <dirent.h>
+#include <unistd.h>
 
 #define LINE_LENGTH 100
 
 int main() {
+
 	//Line to record input, Character to help break apart input, Array to hold the individual characters.
 	char line[LINE_LENGTH], *character, *array[LINE_LENGTH];
 	//Counter to record the length of the array, i is used in the for loop
@@ -20,7 +20,7 @@ int main() {
 		now = time(NULL);
 		currentTime = localtime(&now);
 
-		printf("aman-shell %d:%d:%d# ", currentTime->tm_hour, currentTime->tm_min, currentTime->tm_sec);
+		printf("aman-shell:%d:%d:%d#", currentTime->tm_hour, currentTime->tm_min, currentTime->tm_sec);
 		fgets(line, LINE_LENGTH, stdin);
 		counter = 0; //Record size of array
 		character = strtok(line, " ");
@@ -40,14 +40,19 @@ int main() {
 			return EXIT_SUCCESS;
 		}else if(strcmp("echo", array[0]) == 0) {
 			for(i = 1; i < counter; i++) {
-				printf("%s ",array[i]);
+				printf("%s",array[i]);
 			}			
 		}else {
-			printf("Command not recognized \n");
+			pid_t child;
+			child = fork();
+			//fork succeeded
+			if(child >= 0) {
+				printf("Child PID: %d Parent PID: %d\n", getpid(), getppid());
+
+			}else { //Fork failed
+				printf("Failed to create fork");
+				exit(0);
+			}
 		}
 	}
-}
-
-void fork(){
-	//fork goes here
 }
