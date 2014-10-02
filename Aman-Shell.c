@@ -7,6 +7,14 @@
 
 #define LINE_LENGTH 100
 
+void fork() {
+	//fork goes here
+}
+
+void wait() {
+	//waitpid goes here
+}
+
 int main() {
 	//Line to record input, Character to help break apart input, Array to hold the individual characters.
 	char line[LINE_LENGTH], *character, *array[LINE_LENGTH];
@@ -46,8 +54,4 @@ int main() {
 			printf("Command not recognized \n");
 		}
 	}
-}
-
-void fork(){
-	//fork goes here
 }
