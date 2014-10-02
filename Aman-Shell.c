@@ -47,3 +47,7 @@ int main() {
 		}
 	}
 }
+
+void fork(){
+	//fork goes here
+}
