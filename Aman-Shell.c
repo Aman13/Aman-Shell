@@ -18,6 +18,10 @@ int main() {
 	pid_t pcopy;
 
 	while(1) {
+		//Reset array to all NULL
+		for(i = 0; i < LINE_LENGTH; i++) {
+			array[i] = NULL;
+		}
 		//Display the time
 		time_t now;
 		struct tm *currentTime;
@@ -34,13 +38,7 @@ int main() {
 			array[counter++] = character;
 			character = strtok(NULL, " \n");
 		}
-		//Remove \n from last entry
 
-		//Print whats in array
-		for(i = 0; i < counter; i++) {
-			printf("array position %d contains: %s\n",i, array[i]);
-		}
-		printf("searching for command:%s\n", array[0]);
 		if((strcmp("exit", array[0]) == 0) || strcmp("exit()", array[0]) == 0){
 			printf("Exiting aman-shell\n");
 			return EXIT_SUCCESS;
@@ -54,7 +52,7 @@ int main() {
 			//fork succeeded
 			if(pcopy >= 0) {
 				if(pcopy == 0) {
-					printf("copy pid:%d\nparent pid:%d\nvalue of copy:%d\n", getpid(), getppid(), pcopy);
+			//		printf("copy pid:%d\nparent pid:%d\nvalue of copy:%d\n", getpid(), getppid(), pcopy);
 					exitid = execvp(array[0], array);
 					return exitid;
 				}else {
