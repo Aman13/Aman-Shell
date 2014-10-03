@@ -27,25 +27,28 @@ int main() {
 		printf("aman-shell:%d:%d:%d#", currentTime->tm_hour, currentTime->tm_min, currentTime->tm_sec);
 		fgets(line, LINE_LENGTH, stdin);
 		counter = 0; //Record size of array
-		character = strtok(line, " ");
+		character = strtok(line, " \n");
 
 		//Break string into tokens
 		while(character != NULL) {
 			array[counter++] = character;
-			character = strtok(NULL, " ");
+			character = strtok(NULL, " \n");
 		}
+		//Remove \n from last entry
+
 		//Print whats in array
 		for(i = 0; i < counter; i++) {
 			printf("array position %d contains: %s\n",i, array[i]);
 		}
 		printf("searching for command:%s\n", array[0]);
-		if((strcmp("exit\n", array[0]) == 0) || strcmp("exit()\n", array[0]) == 0){
+		if((strcmp("exit", array[0]) == 0) || strcmp("exit()", array[0]) == 0){
 			printf("Exiting aman-shell\n");
 			return EXIT_SUCCESS;
-		}else if(strcmp("echo", array[0]) == 0) {
-			for(i = 1; i < counter; i++) {
-				printf("%s ",array[i]);
-			}
+//		}else if(strcmp("echo", array[0]) == 0) {
+//			for(i = 1; i < counter; i++) {
+//				printf("%s ",array[i]);
+//			}
+//			printf("\n");
 		}else {
 			pcopy = fork();
 			//fork succeeded
