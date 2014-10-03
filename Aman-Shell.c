@@ -8,6 +8,14 @@
 
 #define LINE_LENGTH 100
 
+void fork() {
+	//fork goes here
+}
+
+void wait() {
+	//waitpid goes here
+}
+
 int main() {
 
 	//Line to record input, Character to help break apart input, Array to hold the individual characters.
